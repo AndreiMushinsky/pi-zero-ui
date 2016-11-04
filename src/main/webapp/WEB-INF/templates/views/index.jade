@@ -1,0 +1,79 @@
+!!! 5
+html(lang="en")
+  head
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    link(rel="stylesheet" href="/public/css/codemirror.css")
+    script(src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
+    script(src="/public/js/arbor.js")
+    script(src="/public/js/arbor-tween.js")
+    script(src="/public/js/arbor-graphics.js")
+    script(src="/public/js/codemirror.js")
+    script(src="/public/js/sql.js")
+    script(src="/public/js/pi-zero.js")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    .container-fluid
+      .row
+        .col-md-6
+          .panel.panel-default
+            .panel-heading 
+              h4 1. Upload your data
+            .panel-body
+              form#data-submit-form(method = "post" action = "/upload" enctype = "multipart/form-data")
+                .form-group
+                  label(for="index") Index
+                  input#index.form-control(type="text" name="index" placeholder="elasticsearch-index")
+                .form-group
+                  label(for="type") Type
+                  input#type.form-control(type="text" name="type" placeholder="Type to be extracted")
+                .form-group
+                  label(for="fileInput") File input 
+                  input#fileInput(type = "file" name = "thefile")
+                  p.help-block Provide XML file containing data
+                .checkbox
+                  label
+                    input(type = "checkbox" name = "gzip") Unzip file
+                button.btn.btn-default(type="submit") Submit
+        .col-md-6
+          .panel.panel-default
+            .panel-heading 
+              h4 2. Explore your data
+            .panel-body
+              table#data-sets.table.table-hover
+                tr
+                  td #
+                  td Index
+                  td Type
+      .row
+        .col-md-12
+          .panel.panel-default
+            .panel-heading 
+              .row
+                .col-md-6
+                  h4 3. Query your data
+                .col-md-6
+                  button#query-button.btn.btn-default(type="button" style="float: right;" data-toggle="modal" data-target="#resultModal" role="button") Query
+            .panel-body
+              h4 SQL Query
+              textarea.sql.form-control(rows="4") SELECT * FROM index/type
+      #myModal.modal.fade(role="dialog")
+        .modal-dialog.modal-lg(style="width: 100%;height: 100%;margin: 0;padding: 0;")
+          .modal-content(style="height:auto;min-height:100%;border-radius: 0;")
+            .modal-header
+              button.close(type="button" data-dismiss="modal") &times;
+              h4.modal-title Data Set
+            .modal-body(style="height:auto;min-height:100%;border-radius: 0;")
+              canvas#sitemap(width="1260" height="480" style="opacity: 1;")
+            .modal-footer
+              button.btn.btn-default(type="button" data-dismiss="modal") Close
+      #resultModal.modal.fade(role="dialog")
+        .modal-dialog.modal-lg(style="width: 100%;height: 100%;margin: 0;padding: 0;")
+          .modal-content(style="height:auto;min-height:100%;border-radius: 0;")
+            .modal-header
+              button.close(type="button" data-dismiss="modal") &times;
+              h4.modal-title Result
+            .modal-body(style="height:auto;min-height:100%;border-radius: 0;")
+              pre.result
+            .modal-footer
+              button.btn.btn-default(type="button" data-dismiss="modal") Close

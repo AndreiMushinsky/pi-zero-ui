@@ -1,0 +1,11 @@
+-@ var schema: String
+!!! 5
+html(lang="en")
+  head
+    script(src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous")
+    script(src="/public/js/arbor.js")
+    script(src="/public/js/arbor-tween.js")
+    script(src="/public/js/arbor-graphics.js")
+    script(src="/public/js/my-arbor.js")
+  body
+    canvas#sitemap(width="1260" height="480" style="opacity: 1;" data-schema=schema)
